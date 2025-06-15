@@ -5,13 +5,13 @@ Follow these steps to install and set up the project.
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/Andreaswt/ai-video-sentiment-model.git
+git clone https://github.com/B-Bazinga/MultiModel-Sentiment-Analysis.git
 ```
 
 ### Navigate to the Project Directory
 
 ```bash
-cd ai-video-sentiment-model
+cd MultiModel-Sentiment-Analysis
 ```
 
 ### Install Python
@@ -47,28 +47,6 @@ Follow these steps to train the model in a training job using AWS SageMaker:
 - AmazonSageMakerFullAccess
 - Access to S3 bucket with dataset
 
-```
-{
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Sid": "VisualEditor0",
-			"Effect": "Allow",
-			"Action": [
-				"s3:PutObject",
-				"s3:GetObject",
-				"s3:ListBucket",
-				"s3:DeleteObject"
-			],
-			"Resource": [
-				"arn:aws:s3:::your-bucket-name",
-				"arn:aws:s3:::your-bucket-name/*"
-			]
-		}
-	]
-}
-```
-
 4. Run the file locally, to start the training job.
 
 ```bash
@@ -84,28 +62,6 @@ Follow these steps to deploy the model as an endpoint using AWS SageMaker:
 - AmazonSageMakerFullAccess
 - CloudWatchLogsFullAccess
 
-```
-{
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Sid": "VisualEditor0",
-			"Effect": "Allow",
-			"Action": [
-				"s3:PutObject",
-				"s3:GetObject",
-				"s3:ListBucket",
-				"s3:DeleteObject"
-			],
-			"Resource": [
-				"arn:aws:s3:::your-bucket-name",
-				"arn:aws:s3:::your-bucket-name/*"
-			]
-		}
-	]
-}
-```
-
 2. Put your model file in an S3 bucket
 
 3. Deploy the endpoint by runnin the file locally:
@@ -117,32 +73,6 @@ python deployment/deploy_endpoint.py
 ### Invoke Endpoint
 
 1. Create a user in IAM with permissions
-
-```
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Effect": "Allow",
-            "Action": [
-                "s3:PutObject"
-            ],
-            "Resource": [
-                "arn:aws:s3:::sentiment-analysis-saas/inference/*"
-            ]
-        },
-        {
-            "Effect": "Allow",
-            "Action": [
-                "sagemaker:InvokeEndpoint"
-            ],
-            "Resource": [
-                "arn:aws:sagemaker:us-east-1:784061079855:endpoint/sentiment-analysis-endpoint"
-            ]
-        }
-    ]
-}
-```
 
 2. Use the user to invoke endpoint. E.g. use [this NPM library](https://www.npmjs.com/package/@aws-sdk/client-sagemaker-runtime) for invoking from JavaScript:
 
